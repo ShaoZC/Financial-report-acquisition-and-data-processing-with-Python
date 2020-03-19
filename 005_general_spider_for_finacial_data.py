@@ -3,6 +3,32 @@ def sleep(n):
     import time
     import random
     time.sleep(random.random() * n)
+def time_now():
+    import time
+    return time.strftime('%Y-%m-%d-%H%M%S',time.localtime(time.time()))
+def html_save(data):#filename为写入CSV文件的路径，data为要写入数据列表.
+  filename='C:/data/html/' + str(time_now()) + '.html'
+  with open(filename, 'w', encoding='utf-8') as f:
+      # with open('C:/data/'+str(time_now())+'.html', 'w', encoding='gbk') as f:
+      f.write(data)
+  print("保存",filename,"文件成功")
+def text_save(data):#filename为写入CSV文件的路径，data为要写入数据列表.
+  filename='C:/data/text/'+str(time_now())+'.txt'
+  file = open(filename,'a', encoding='utf-8')
+  file.write(data)
+  # for i in range(len(data)):
+  #   s = str(data[i]).replace('[','').replace(']','')#去除[],这两行按数据不同，可以选择
+  #   s = s.replace("'",'').replace(',','') +'\n'  #去除单引号，逗号，每行末尾追加换行符
+  #   file.write(s)
+  file.close()
+  print("保存",filename,"文件成功")
+def write_csv(data):
+    filename='C:/data/csv/'+str(time_now())+'.csv'
+    import csv
+    f = open(filename, 'w', encoding='utf-8')
+    writer = csv.writer(f)
+    writer.writerow(data)
+    print("保存", filename, "文件成功")
 def headers():
     USER_AGENT_LIST = [
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
@@ -45,6 +71,19 @@ def headers():
     USER_AGENT = random.choice(USER_AGENT_LIST)
     headers = {'user-agent': USER_AGENT}
     return headers
+def get_521_content(url):
+    import requests;import re
+    headers={
+        'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36'
+    }
+    req=requests.get(url,headers=headers)
+    cookies=req.cookies
+    cookies='; '.join(['='.join(item) for item in cookies.items()])
+    txt_521=req.text
+    txt_521=''.join(re.findall('<script>(.*?)</script>',txt_521))
+    print(txt_521,txt_521)
+    print('cookies','\n',cookies)
+    return (txt_521,cookies)
 def COOKIES(url):
     import selenium
     from selenium import webdriver
@@ -56,11 +95,15 @@ def COOKIES(url):
         cookie += c['name'] +'='  +  c['value'] +';'
     return cookie
     driver.quit()
-def requested(url,xpath1,keywords):
+def requested(url,xpath1,*keywords):
     import requests
     import re
     from lxml import etree
+    # response = requests.get(url, headers=headers(),cookie=get_521_content(url)[1]);
     response=requests.get(url,headers=headers());
+    write_csv(response.text)
+    html_save(response.text)
+    text_save(response.text)
     if response.status_code== 200:
         pass
     else:
@@ -69,20 +112,24 @@ def requested(url,xpath1,keywords):
     response.encoding=response.apparent_encoding
     # response.encoding='utf-8'
     # print(response.content)
+    # print(response.text)
     html=etree.HTML(response.text)
     items=html.xpath(xpath1)
     print('共找到',len(items),'条符合条件的结果')
     if len(items)>1:
         for i in range(len(items)):
             # print(len(items),'-',i+1,'','',items[i])
-            if items[i].find(keywords)>-1:
-                print(i,len(items),items[i])
+            # print(keywords)
+            if keywords==():
+                pass
+            elif items[i].find(keywords)>-1:
+                print(i,len(items),keywords,items[i])
             else:
-                pass #print(keywords,'not found未找到')
+                print(keywords,'not found未找到')
         return items
     else:
         print(url,'未找到结果')
-    sleep(100)
+    sleep(5)
 
 
 ##############################################################################################
@@ -94,7 +141,30 @@ def requested(url,xpath1,keywords):
 # url='http://www.bidchance.com/freesearch.do?filetype=&channel=&channels=zhongbiao&currentpage=1&searchtype=&queryword=%C4%DA%BF%D8&displayStyle=&pstate=&field=title&leftday=&province=&bidfile=&project=&heshi=&recommend=&field=title&jing=&starttime=&endtime=&attachment='
 # ##内控标题搜索
 # xpath1='//div//tr/td//text()'
+# get_521_content(url)
 # requested(url,xpath1)
+
+##############################################################################################
+#############                         京东                                 #################
+###############################################################################################
+# url='https://www.jd.com/'
+# xpath1='//a//text()'
+# requested(url,xpath1)
+
+##############################################################################################
+#############                         淘宝                                 #################
+###############################################################################################
+# url='https://www.taobao.com/'
+# xpath1='//a//text()'
+# requested(url,xpath1)
+
+##############################################################################################
+#############                         36kr                                 #################
+###############################################################################################
+url='https://www.36kr.com/'
+xpath1='//a//text()'
+requested(url,xpath1)
+
 ##############################################################################################
 #############                         虎嗅网                                 #################
 ###############################################################################################
