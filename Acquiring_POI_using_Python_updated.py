@@ -12,7 +12,7 @@ def sleep(n):
     time.sleep(n)
     print("~~~sleeping~~~~")
 def requested(url):
-    sleep(10)
+    sleep(5)
     html=requests.get(url)
     data=html.json()
     return data
@@ -25,21 +25,25 @@ def time_now():
     time_now=time.strftime('%Y-%m-%d-%H%M%S',time.localtime(time.time()))
     print(time_now)
     return str(time_now)
+
 ak ="C75tUrXIZKbn3QOMB3e9cIx7g9fsMrUo"
 url_1='http://api.map.baidu.com/place/v2/search?query='
-url_2='大学'#搜索关键词
+url_2='整容'#搜索关键词
 url_3='&region='
-url_4='北京'#所在城市
+url_4='武汉'#所在城市
 url_5='&page_size=20&page_num='
 url_6='1'
 url_7='&output=json&ak='+ak
-url=url_1+url_2+url_3+url_4+url_5+url_6+url_7
-file=time_now()+"results.txt"
-data=requested(url)
-for item in data['results']:
-    jname = item['name']
-    j_data=jname+'\n'
-    write_txt(file, j_data)
+file=time_now()+url_4+'-'+url_2+"results.txt"
+for url_6 in range(20):
+    url=url_1+url_2+url_3+url_4+url_5+str(url_6)+url_7
+    data=requested(url)
+    for item in data['results']:
+        jname = item['name']
+        j_data=url_4+url_2+str(url_6)+jname+'\n'
+        write_txt(file, j_data)
+
+
 
 # for item in data['results']:
     # jname=item['name']
