@@ -26,6 +26,8 @@ def time_now():
     print(time_now)
     return str(time_now)
 ak ="C75tUrXIZKbn3QOMB3e9cIx7g9fsMrUo"
+# url='http://api.map.baidu.com/place/v2/search?query=楚雄& bounds=24.390894,102.174112,26.548645,103.678942&page_size=20&page_num=0&output=json&ak='+ak
+
 url_1='http://api.map.baidu.com/place/v2/search?query='
 url_2='大学'#搜索关键词
 url_3='&region='
