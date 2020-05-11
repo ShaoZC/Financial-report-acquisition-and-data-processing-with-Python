@@ -38,7 +38,7 @@ def selected(html):
     selector = etree.HTML(html)
     title = selector.xpath('//table/tr/td//text()')
     # 去除其中的冒号
-    title_1 = []
+    # title_1 = []
     title_1.append(mkt_value(each0))
     for i in title:
         # i = i.strip()
@@ -59,10 +59,9 @@ def mkt_value(stock_no):
     return content1[-2]
 ###############################################
 ######主程序############################
-############################################### 
-file_folder= "D:/OneDrive/文档/stock2020/"
-file_name="20200511-2酒店旅游概念.xls"
-file_source="stock_hotel_code.txt"
+###############################################
+file_folder= "C://TEMP/Excel/";file_name="20200511-2在线办公概念.xls";file_source="2020-05-10-online-office.txt"
+#file_folder= "D:/OneDrive/文档/stock2020/"; file_name="20200511-2酒店旅游概念.xls";file_source="stock_hotel_code.txt"
 # file_folder= "C:/Users/wade z shao/Documents/202001Shennandonglu5016#29F/202003电力行业调研/"
 # file_name="electricity_stock_workbook.xls"
 # file_source="stock_electricity_3.txt"
@@ -73,7 +72,7 @@ url_source=open(file_folder+file_source)
 f=open(file_folder+file_source,'rb')
 stock = []
 for line in f.readlines():
-    line=line.decode()
+    line=line.decode('utf-8')
     print(line)
     #print(line,end = '')
     # line = line[1:].replace(' ','')
@@ -84,18 +83,19 @@ print(stock)
 f.close()
 ###########################################################
 iinum = 1
-for each in stock:
+for each in stock[1:]:
     # print(each[2:])
-    each0=each[:8]
+    each0=each[0:8]
     each1=each[2:8]
-    # print(each)
+    print(each0,each1)
+    title_1=[]
+    title_1.append(each)
     url = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpInfo/stockid/'+each1+'.phtml'
 ###########################################################
     html=requested(url)# 开始爬虫
     title_1=selected(html)    
     path1 = file_folder+file_name
     print(path1)
-
     # mkt_value=str(mkt_value(each0))
     # print(mkt_value)
     write_excel_xls(path1,title_1,iinum)# 存入excel
