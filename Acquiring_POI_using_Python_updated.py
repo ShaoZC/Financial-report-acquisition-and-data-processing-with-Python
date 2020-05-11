@@ -28,9 +28,9 @@ def time_now():
 
 ak ="C75tUrXIZKbn3QOMB3e9cIx7g9fsMrUo"
 url_1='http://api.map.baidu.com/place/v2/search?query='
-url_2='整容'#搜索关键词
+url_2='南京路'#搜索关键词
 url_3='&region='
-url_4='武汉'#所在城市
+url_4='信阳'#所在城市
 url_5='&page_size=20&page_num='
 url_6='1'
 url_7='&output=json&ak='+ak
@@ -40,7 +40,10 @@ for url_6 in range(20):
     data=requested(url)
     for item in data['results']:
         jname = item['name']
-        j_data=url_4+url_2+str(url_6)+jname+'\n'
+        jlat = item['location']['lat']
+        jlon = item['location']['lng']
+        jadd = item['address']
+        j_data=url_4+url_2+','+str(url_6)+','+jname+','+str(jlat)+','+str(jlon)+','+jadd+'\n'
         write_txt(file, j_data)
 
 
