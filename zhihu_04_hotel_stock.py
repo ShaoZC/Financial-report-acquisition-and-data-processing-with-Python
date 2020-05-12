@@ -60,7 +60,9 @@ def mkt_value(stock_no):
 ###############################################
 ######主程序############################
 ###############################################
-file_folder= "C://TEMP/Excel/";file_name="20200511-2在线办公概念.xls";file_source="2020-05-10-online-office.txt"
+file_folder= "C://TEMP/Excel/";file_name="20200511-2车联网概念.xls";file_source="2020-05-12-iov.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2量子通信概念.xls";file_source="2020-05-12-quant-comm.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2在线办公概念.xls";file_source="2020-05-10-online-office.txt"
 #file_folder= "D:/OneDrive/文档/stock2020/"; file_name="20200511-2酒店旅游概念.xls";file_source="stock_hotel_code.txt"
 # file_folder= "C:/Users/wade z shao/Documents/202001Shennandonglu5016#29F/202003电力行业调研/"
 # file_name="electricity_stock_workbook.xls"
