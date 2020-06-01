@@ -60,7 +60,11 @@ def mkt_value(stock_no):
 ###############################################
 ######主程序############################
 ###############################################
-file_folder= "C://TEMP/Excel/";file_name="20200511-2车联网概念.xls";file_source="2020-05-12-iov.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2网络游戏概念.xls";file_source="stock-list-20200512-online_game.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2影视动漫概念.xls";file_source="stock-list-20200512-film.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2智能手机概念.xls";file_source="stock-list-20200512-phone.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2在线教育概念.xls";file_source="stock-list-20200512-online_edu.txt"
+# file_folder= "C://TEMP/Excel/";file_name="20200511-2车联网概念.xls";file_source="2020-05-12-iov.txt"
 # file_folder= "C://TEMP/Excel/";file_name="20200511-2量子通信概念.xls";file_source="2020-05-12-quant-comm.txt"
 # file_folder= "C://TEMP/Excel/";file_name="20200511-2在线办公概念.xls";file_source="2020-05-10-online-office.txt"
 #file_folder= "D:/OneDrive/文档/stock2020/"; file_name="20200511-2酒店旅游概念.xls";file_source="stock_hotel_code.txt"
