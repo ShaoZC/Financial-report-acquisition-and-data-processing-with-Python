@@ -44,7 +44,7 @@ def selected(html):
         # i = i.strip()
         i = i.strip('：')
         title_1.append(i)
-    print("title_1", title_1[0:40])
+    print("title_1", title_1[0:40]) 
     return title_1    
 ###############################################
 ######获取总市值############################
