@@ -3,7 +3,8 @@ import re
 import os
 import time
 import random
-file_folder= "C://TEMP/Excel/";file_name="stock-list-20200512-electricity.txt"
+file_folder= "C://TEMP/Excel/";file_name="stock-list-20200512-electricity1.txt"
+# file_folder= "C://TEMP/Excel/";file_name="stock-list-20200512-electricity.txt"
 f=open(file_folder+file_name,'rb')
 stock = []
 for line in f.readlines():
@@ -15,7 +16,7 @@ for line in f.readlines():
 f.close()
 print('stock is',stock[:5])
 
-for each in stock[5:]:
+for each in stock[1:]:
     print('~~~~each is',each)
     each1=each[2:8];each0=each[0:8];each3=each
     print(each3)
@@ -72,7 +73,7 @@ for each in stock[5:]:
                     print(each3)
                     report_file=each3+report_year
                     print(report_file,report_file,report_file,report_file)
-                    local = file_folder+'annual_report_2019/'+report_file+'.pdf'
+                    local = file_folder+'annual_report_2019/'+'风电'+report_file+'.pdf'
                     # local = './' +'annual_report_2019'+ '/' +each3+report_year+'.pdf'
                     # print('local',local)
                     # # local = './'+each+'/'+file_url.group(0).split("/")[-4]+'.pdf'
